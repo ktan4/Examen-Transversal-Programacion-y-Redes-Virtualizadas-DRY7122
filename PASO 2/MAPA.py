@@ -4,12 +4,12 @@ import urllib.parse
 import requests
 
 main_api = "https://www.mapquestapi.com/directions/v2/route?"
-key = "LWPG7pOaoqiPjZeYV8lFY3z3hIP3DI3X"
+key = ""
 locale = "es_MX"
 unit = "k"
 avoids = "Toll Road"
 routeType = "fastest"
-directions_open = False  # Variable para verificar si se han abierto las indicaciones
+directions_open = False  
 
 def get_directions():
     global directions_open
@@ -18,7 +18,7 @@ def get_directions():
     dest = dest_entry.get()
     vehicle_type = vehicle_var.get()
 
-    # Mapear los valores seleccionados a los nombres en español
+
     vehicle_map = {
         "car": "auto",
         "motorcycle": "motocicleta",
@@ -40,17 +40,17 @@ def get_directions():
         duration = json_data["route"]["formattedTime"]
         distance = "{:.3f}".format(json_data["route"]["distance"])
 
-        # Calcular el combustible requerido según el tipo de vehículo
+      
         if vehicle_type == "car":
-            mileage = 12.5  # Ejemplo de kilometraje para un auto
+            mileage = 12.5
         elif vehicle_type == "motorcycle":
-            mileage = 20.0  # Ejemplo de kilometraje para una motocicleta
+            mileage = 20.0 
         elif vehicle_type == "walking":
-            mileage = 0.0  # Sin consumo de combustible al caminar
+            mileage = 0.0 
         elif vehicle_type == "bus":
-            mileage = 5.0  # Ejemplo de consumo de combustible para un autobús
+            mileage = 5.0  
         elif vehicle_type == "bicycle":
-            mileage = 0.0  # Sin consumo de combustible en bicicleta
+            mileage = 0.0  
         else:
             result_text.set("Tipo de vehículo inválido")
             return
@@ -101,8 +101,7 @@ def open_directions_window(orig, dest, duration, distance, fuel_required, maneuv
     for maneuver in maneuvers:
         maneuvers_text.insert(tk.END, maneuver["narrative"] + "\n")
 
-    directions_open = True  # Indicaciones abiertas
-
+    directions_open = True  
 
 def exit_program(event):
     global directions_open
